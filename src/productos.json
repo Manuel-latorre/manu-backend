@@ -1,0 +1,38 @@
+[
+  {
+    "title": "GTA V",
+    "description": "juego digital ps4",
+    "price": 1000,
+    "thumbnail": "img",
+    "code": 2244,
+    "stock": 777,
+    "id": 1
+  },
+  {
+    "title": "Fifa 23",
+    "description": "juego digital ps5",
+    "price": 8999,
+    "thumbnail": "img",
+    "code": 3999,
+    "stock": 777,
+    "id": 2
+  },
+  {
+    "title": "Call Of Duty Black Ops",
+    "description": "juego digital ps4",
+    "price": 3020,
+    "thumbnail": "img",
+    "code": 145,
+    "stock": 32,
+    "id": 3
+  },
+  {
+    "title": "God of War",
+    "description": "juego digital ps3",
+    "price": 340,
+    "thumbnail": "img",
+    "code": 444,
+    "stock": 3,
+    "id": 5
+  }
+]

@@ -84,11 +84,10 @@ class ProductManager {
         }
     }
 }
-const products = new ProductManager("./productos.json");
 
-await products.updateProduct(3, "stock", 32)
-await products.addProduct({title: "God of War", description: "juego digital ps3", price: 340, thumbnail:"img", code: 444, stock:3 });
-await products.deleteProduct(4);
+export default ProductManager;
+
+
 
 
 
