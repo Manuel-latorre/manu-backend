@@ -1,36 +1,38 @@
-import ProductManager from "./ProductManager.js";
-import express from 'express';
+import express from "express";
+import { __dirname, __filename } from "./path.js";
+import routerProduct from "./routes/products.routes.js";
+import routerCart from "./routes/cart.routes.js"
+import multer from "multer";
 
-const app = express(); //app es igual a la ejecución de express
-const PORT = 4000     //defino el puerto
-const manager = new ProductManager("./src/productos.json")
+// const upload = multer({dest:"src/public/img"}); //Forma basica de utilizar Multer
 
-app.use(express.urlencoded({extended: true}));  //permite realizar consultas en la URL(req.query)
-
-app.get('/', (req, res) => {
-    res.send("Este es mi server con express para desadio N3")
-});
-
-
-
-app.get('/products', async (req, res) => {
-    const products = await manager.getProducts()
-    
-    let {limit} = req.query
-    if(limit){
-        res.send(products.slice(0, limit))
-    }else{
-        res.send(products)
+const storage = multer.diskStorage({
+    destination: (req,file,cb)=>{
+        cb(null,"src/public/img");        
+    },
+    filename: (req,file,cb)=>{
+        cb(null, `${file.originalname}`)
     }
 })
 
+const upload = multer({storage:storage})
 
-app.get('/products/:id', async (req, res) => {
-    const product = await manager.getById(parseInt(req.params.id));
-    console.log(product)
-    res.send(product)
+const app = express();
+const PORT = 8080;
+
+//Middlewares
+app.use(express.urlencoded({ extended: true }));
+app.use(express.json())
+
+//Routes
+app.use('/static', express.static(__dirname + '/public')) //En "/public" va la carpeta que deseo colocar luego de static
+app.use("/api/products", routerProduct)
+app.use("/api/carts", routerCart)
+app.post("/upload",upload.single("product"),(req,res)=>{
+    res.send("Imagen Cargada")
 })
+
 
 app.listen(PORT, () => {
-    console.log(`Server on port ${PORT}`);
-})
+    console.log(`Server on port:${PORT}`);
+});
